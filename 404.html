@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Tidak Ditemukan | ruang.afno</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #4a5568;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            padding: 3rem 2rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: #a0aec0;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+
+        .error-code {
+            font-size: 0.9rem;
+            color: #e53e3e;
+            margin-bottom: 1.5rem;
+            padding: 5px 10px;
+            background: #fed7d7;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.8;
+        }
+
+        .links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #4a5568;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #2d3748;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: #667eea;
+        }
+
+        .btn-primary:hover {
+            background: #5a6fd8;
+        }
+
+        .footer {
+            margin-top: 2.5rem;
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">◯</div>
+        <div class="error-code">Error 404 - Halaman Tidak Ditemukan</div>
+        <h1>Ini kosong</h1>
+        <p>Halaman yang Anda cari tidak ditemukan.</p>
+        
+        <div class="footer">
+        </div>
+    </div>
+
+    <script>
+        setTimeout(function() {
+            window.location.href = "https://www.afno.spacs";
+        }, 5000);
+    </script>
+</body>
+</html>
