@@ -1,2 +1,2 @@
 # ruangafno.github.io
-Just gabut project
+Just project gabut
