@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .button:active {
+      transform: translateY(0);
+    }
+
+    .button.share {
+      background-color: #3e3e3e;
+    }
+
+    .button.share:hover {
+      background-color: #3e3e3e;
+    }
+
+    footer {
+      margin-top: 20px;
+      color: #888;
+    }
+
+    footer a {
+      color: #888;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #333;
+    }
+
+    /* Responsif */
+    @media (max-width: 768px) {
+      .container {
+        width: 90%;
+        padding: 30px;
+      }
+      
+      h1 {
+        font-size: 30px;
+      }
+      
+      blockquote {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <blockquote id="quote">
+      "Jika kamu mencintai seseorang, biarkan dia pergi.Jika ia kembali, maka ia milikmu.Namun jika ia tidak kembali, ketahuilah maka dia bukan milikmu."
+      <small id="author">Ali bin Abi Thalib</small>
+    </blockquote>
+    
+    <div style="margin: 25px 0;">
+      <button id="share-quote" class="button share">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
+        </svg>
+        Bagikan Kutipan
+      </button>
+    </div>
+    
+    <footer>
+      <p>&copy; 2025 ruang.afno | <a href="https://www.instagram.com/ruang.afno">Tentang Afno</a></p>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const shareQuoteButton = document.getElementById('share-quote');
+      
+      // Fungsi untuk membagikan quote
+      function shareQuote() {
+        const quoteElement = document.getElementById('quote');
+        const quoteText = quoteElement.textContent;
+        
+        if (navigator.share) {
+          // Menggunakan Web Share API jika tersedia
+          navigator.share({
+            title: 'Kutipan',
+            text: quoteText,
+            url: window.location.href
+          })
+          .catch(error => console.log('Error sharing:', error));
+        } else {
+          // Fallback untuk browser yang tidak mendukung Web Share API
+          navigator.clipboard.writeText(quoteText)
+            .then(() => {
+              alert('Kutipan telah disalin ke clipboard!');
+            })
+            .catch(err => {
+              console.error('Gagal menyalin teks: ', err);
+              // Fallback kedua untuk browser yang lebih lama
+              const textArea = document.createElement('textarea');
+              textArea.value = quoteText;
+              document.body.appendChild(textArea);
+              textArea.select();
+              document.execCommand('copy');
+              document.body.removeChild(textArea);
+              alert('Kutipan telah disalin ke clipboard!');
+            });
+        }
+      }
+      
+      // Event listener untuk tombol share
+      shareQuoteButton.addEventListener('click', shareQuote);
+    });
+  </script>
+</body>
+</html>
