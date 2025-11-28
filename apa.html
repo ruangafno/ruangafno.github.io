@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotes Inspiratif</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+
+        header {
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            font-weight: 300;
+        }
+
+        .quote-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 40px 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .quote-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: #2c3e50;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .quote-text::before, .quote-text::after {
+            content: '"';
+            font-size: 4rem;
+            color: #e74c3c;
+            opacity: 0.2;
+            position: absolute;
+            line-height: 1;
+        }
+
+        .quote-text::before {
+            top: -15px;
+            left: -25px;
+        }
+
+        .quote-text::after {
+            content: '"';
+            bottom: -45px;
+            right: -25px;
+        }
+
+        .quote-author {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            text-align: right;
+            font-weight: 500;
+            margin-top: 15px;
+        }
+
+        .quote-author::before {
+            content: "— ";
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(44, 62, 80, 0.2);
+        }
+
+        button:hover {
+            background-color: #34495e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 62, 80, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .category-btn {
+            background-color: transparent;
+            color: #7f8c8d;
+            border: 1px solid #ddd;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+
+        .category-btn.active {
+            background-color: #2c3e50;
+            color: white;
+            border-color: #2c3e50;
+        }
+
+        footer {
+            margin-top: 40px;
+            color: #95a5a6;
+            font-size: 0.9rem;
+        }
+
+        .share-btn {
+            background-color: #3498db;
+        }
+
+        .share-btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Animasi untuk perubahan quote */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .quote-text {
+                font-size: 1.5rem;
+            }
+            
+            .quote-container {
+                padding: 30px;
+            }
+            
+            .quote-text::before {
+                left: -15px;
+            }
+            
+            .quote-text::after {
+                right: -15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .quote-text {
+                font-size: 1.3rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            button {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Kata Bijak Harian</h1>
+            <p class="subtitle">Temukan inspirasi dalam setiap kata</p>
+        </header>
+        
+        <div class="categories">
+            <button class="category-btn active" data-category="all">Semua</button>
+            <button class="category-btn" data-category="motivation">Motivasi</button>
+            <button class="category-btn" data-category="life">Kehidupan</button>
+            <button class="category-btn" data-category="wisdom">Kebijaksanaan</button>
+            <button class="category-btn" data-category="success">Kesuksesan</button>
+        </div>
+        
+        <div class="quote-container">
+            <p class="quote-text" id="quote">Kesuksesan bukanlah kunci kebahagiaan. Kebahagiaan adalah kunci kesuksesan. Jika kamu mencintai apa yang kamu lakukan, kamu akan berhasil.</p>
+            <p class="quote-author" id="author">Albert Schweitzer</p>
+        </div>
+        
+        <div class="controls">
+            <button id="new-quote">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+                </svg>
+                Quote Baru
+            </button>
+            <button id="share-quote" class="share-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
+                </svg>
+                Bagikan
+            </button>
+        </div>
+        
+        <footer>
+            <p>© 2023 Quotes Inspiratif • Dibuat dengan ❤️</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const quoteElement = document.getElementById('quote');
+            const authorElement = document.getElementById('author');
+            const newQuoteButton = document.getElementById('new-quote');
+            const shareQuoteButton = document.getElementById('share-quote');
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            
+            // Koleksi quotes
+            const quotes = [
+                {
+                    text: "Hidup adalah 10% apa yang terjadi padamu dan 90% bagaimana kamu meresponsnya.",
+                    author: "Charles R. Swindoll",
+                    category: "life"
+                },
+                {
+                    text: "Cara terbaik untuk memulai adalah berhenti berbicara dan mulai melakukan.",
+                    author: "Walt Disney",
+                    category: "motivation"
+                },
+                {
+                    text: "Kesuksesan bukanlah akhir, kegagalan bukanlah fatal: yang penting adalah keberanian untuk melanjutkan.",
+                    author: "Winston Churchill",
+                    category: "success"
+                },
+                {
+                    text: "Kebahagiaan bukanlah sesuatu yang sudah jadi. Itu berasal dari tindakanmu sendiri.",
+                    author: "Dalai Lama",
+                    category: "wisdom"
+                },
+                {
+                    text: "Masa depan tergantung pada apa yang kamu lakukan hari ini.",
+                    author: "Mahatma Gandhi",
+                    category: "motivation"
+                },
+                {
+                    text: "Satu-satunya batasan untuk meraih mimpi adalah keraguan yang kita miliki hari ini.",
+                    author: "Franklin D. Roosevelt",
+                    category: "success"
+                },
+                {
+                    text: "Jadilah diri sendiri yang lain sudah ada.",
+                    author: "Oscar Wilde",
+                    category: "wisdom"
+                },
+                {
+                    text: "Kesempatan tidak terjadi, kamu yang menciptakannya.",
+                    author: "Chris Grosser",
+                    category: "success"
+                },
+                {
+                    text: "Pikiran adalah segalanya. Apa yang kamu pikirkan, itulah yang akan kamu menjadi.",
+                    author: "Buddha",
+                    category: "wisdom"
+                },
+                {
+                    text: "Lebih baik gagal dalam orisinalitas daripada berhasil dalam meniru.",
+                    author: "Herman Melville",
+                    category: "life"
+                },
+                {
+                    text: "Hidup yang hebat diinspirasi oleh cinta dan dipandu oleh pengetahuan.",
+                    author: "Bertrand Russell",
+                    category: "life"
+                },
+                {
+                    text: "Jangan biarkan kemarin mengambil terlalu banyak hari ini.",
+                    author: "Will Rogers",
+                    category: "wisdom"
+                },
+                {
+                    text: "Kamu tidak perlu melihat seluruh tangga, cukup ambil langkah pertama.",
+                    author: "Martin Luther King Jr.",
+                    category: "motivation"
+                },
+                {
+                    text: "Pendidikan adalah senjata paling ampuh yang dapat kamu gunakan untuk mengubah dunia.",
+                    author: "Nelson Mandela",
+                    category: "wisdom"
+                },
+                {
+                    text: "Kreativitas adalah kecerdasan yang bersenang-senang.",
+                    author: "Albert Einstein",
+                    category: "success"
+                }
+            ];
+            
+            let currentCategory = 'all';
+            
+            // Fungsi untuk mendapatkan quote acak
+            function getRandomQuote() {
+                let filteredQuotes = quotes;
+                
+                if (currentCategory !== 'all') {
+                    filteredQuotes = quotes.filter(quote => quote.category === currentCategory);
+                }
+                
+                if (filteredQuotes.length === 0) {
+                    return {
+                        text: "Tidak ada quotes dalam kategori ini.",
+                        author: "Sistem",
+                        category: "all"
+                    };
+                }
+                
+                const randomIndex = Math.floor(Math.random() * filteredQuotes.length);
+                return filteredQuotes[randomIndex];
+            }
+            
+            // Fungsi untuk menampilkan quote baru
+            function displayNewQuote() {
+                const quote = getRandomQuote();
+                
+                // Animasi fade out
+                quoteElement.style.opacity = 0;
+                authorElement.style.opacity = 0;
+                
+                setTimeout(() => {
+                    quoteElement.textContent = quote.text;
+                    authorElement.textContent = quote.author;
+                    
+                    // Animasi fade in
+                    quoteElement.classList.add('fade-in');
+                    authorElement.classList.add('fade-in');
+                    
+                    setTimeout(() => {
+                        quoteElement.classList.remove('fade-in');
+                        authorElement.classList.remove('fade-in');
+                    }, 500);
+                }, 300);
+            }
+            
+            // Fungsi untuk membagikan quote
+            function shareQuote() {
+                const quote = quoteElement.textContent;
+                const author = authorElement.textContent;
+                const text = `"${quote}" - ${author}`;
+                
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Kutipan Inspiratif',
+                        text: text,
+                        url: window.location.href
+                    })
+                    .catch(error => console.log('Error sharing:', error));
+                } else {
+                    // Fallback untuk browser yang tidak mendukung Web Share API
+                    navigator.clipboard.writeText(text)
+                        .then(() => {
+                            alert('Kutipan telah disalin ke clipboard!');
+                        })
+                        .catch(err => {
+                            console.error('Gagal menyalin teks: ', err);
+                        });
+                }
+            }
+            
+            // Event listeners
+            newQuoteButton.addEventListener('click', displayNewQuote);
+            shareQuoteButton.addEventListener('click', shareQuote);
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Hapus kelas active dari semua tombol
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Tambahkan kelas active ke tombol yang diklik
+                    this.classList.add('active');
+                    
+                    // Perbarui kategori saat ini
+                    currentCategory = this.getAttribute('data-category');
+                    
+                    // Tampilkan quote baru berdasarkan kategori
+                    displayNewQuote();
+                });
+            });
+            
+            // Tampilkan quote pertama saat halaman dimuat
+            displayNewQuote();
+        });
+    </script>
+</body>
+</html>
