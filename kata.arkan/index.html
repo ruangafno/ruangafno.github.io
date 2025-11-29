@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sebuah Kata - Dari Arkan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* 🌲 TEMA ALAM/ORGANIK */
+    body {
+      font-family: 'Lora', serif; /* Font serif yang lebih lembut untuk body */
+      margin: 0;
+      padding: 0;
+      /* Background krem hangat */
+      background: linear-gradient(135deg, #fcf8f3, #e8e4db); 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      color: #4a4a4a; /* Teks cokelat gelap */
+    }
+
+    .container {
+      background-color: #ffffff; 
+      border-radius: 4px; /* Sudut lebih tajam/klasik */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 600px;
+      padding: 40px;
+      transition: transform 0.3s ease;
+      border: 1px solid #dcdcdc;
+    }
+
+    .container:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      color: #383838;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+
+    blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #5d5d5d;
+      margin: 0;
+      padding: 20px;
+      border-left: 4px solid #8b5e3c; /* Garis aksen cokelat tembaga */
+      position: relative;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    blockquote::before, blockquote::after {
+      content: '“'; /* Menggunakan tanda kutip ganda yang stylish */
+      font-size: 3.5rem;
+      color: #9c6c44; /* Warna aksen yang lebih hangat */
+      opacity: 0.7;
+      position: absolute;
+      line-height: 1;
+    }
+
+    blockquote::before {
+      top: -10px;
+      left: 0px;
+      content: '“';
+    }
+
+    blockquote::after {
+      content: '”';
+      bottom: -40px;
+      right: 0px;
+    }
+
+    blockquote small {
+      display: block;
+      margin-top: 15px;
+      font-size: 16px;
+      color: #777;
+      font-style: normal;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    blockquote small::before {
+      content: "— ";
+    }
+
+    .button {
+      background-color: #6a9955; /* Hijau zaitun/hutan */
+      color: #ffffff;
+      padding: 12px 25px;
+      border-radius: 4px; /* Sudut tombol lebih tegas */
+      text-decoration: none;
+      border: none;
+      font-family: 'Roboto', sans-serif;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .button:hover {
+      background-color: #8b5e3c; /* Hover dengan warna tembaga */
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .button:active {
+      transform: translateY(0);
+    }
+
+    .button.share {
+      background-color: #888;
+    }
+
+    .button.share:hover {
+      background-color: #999;
+    }
+
+    footer {
+      margin-top: 20px;
+      color: #8a8a8a;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    footer a {
+      color: #8a8a8a;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #6a9955;
+    }
+
+    /* Responsif */
+    @media (max-width: 768px) {
+      .container {
+        width: 90%;
+        padding: 30px;
+      }
+      
+      h1 {
+        font-size: 30px;
+      }
+      
+      blockquote {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sebuah Kata</h1>
+    <blockquote id="quote">
+      "Selama lampu merah belom nyala, gaskan aja."
+      <small id="author">Arkan</small>
+    </blockquote>
+    
+    
+    <footer>
+      <p>&copy; 2025 ruang.afno | <a href="https://www.instagram.com/ruang.afno">Tentang Afno</a></p>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const shareQuoteButton = document.getElementById('share-quote');
+      
+      // Fungsi untuk membagikan quote
+      function shareQuote() {
+        const quoteElement = document.getElementById('quote');
+        const quoteText = quoteElement.textContent;
+        
+        if (navigator.share) {
+          // Menggunakan Web Share API jika tersedia
+          navigator.share({
+            title: 'Kutipan',
+            text: quoteText,
+            url: window.location.href
+          })
+          .catch(error => console.log('Error sharing:', error));
+        } else {
+          // Fallback untuk browser yang tidak mendukung Web Share API
+          navigator.clipboard.writeText(quoteText)
+            .then(() => {
+              alert('Kutipan telah disalin ke clipboard!');
+            })
+            .catch(err => {
+              console.error('Gagal menyalin teks: ', err);
+              // Fallback kedua untuk browser yang lebih lama
+              const textArea = document.createElement('textarea');
+              textArea.value = quoteText;
+              document.body.appendChild(textArea);
+              textArea.select();
+              document.execCommand('copy');
+              document.body.removeChild(textArea);
+              alert('Kutipan telah disalin ke clipboard!');
+            });
+        }
+      }
+      
+      // Event listener untuk tombol share
+      shareQuoteButton.addEventListener('click', shareQuote);
+    });
+  </script>
+</body>
+</html>
