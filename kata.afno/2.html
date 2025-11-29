@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sebuah Kata - Dark Mode</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* 🌌 TEMA GELAP */
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      /* Background gelap yang elegan */
+      background: linear-gradient(135deg, #121212, #1f1f1f); 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      color: #e0e0e0; /* Teks default cerah */
+    }
+
+    .container {
+      background-color: #2c2c2c; /* Kartu background gelap */
+      border-radius: 12px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); /* Shadow lebih gelap dan menonjol */
+      width: 80%;
+      max-width: 600px;
+      padding: 40px;
+      transition: transform 0.3s ease;
+      border: 1px solid #3c3c3c; /* Sedikit outline */
+    }
+
+    .container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      color: #ffffff; /* Teks judul putih */
+      margin-bottom: 20px;
+    }
+
+    blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #f0f0f0; /* Teks kutipan cerah */
+      margin: 0;
+      padding: 20px;
+      border-left: 4px solid #bb86fc; /* Garis aksen ungu/magenta */
+      position: relative;
+      line-height: 1.5;
+    }
+
+    blockquote::before, blockquote::after {
+      content: '"';
+      font-size: 3rem;
+      color: #bb86fc; /* Warna aksen kutipan */
+      opacity: 0.5;
+      position: absolute;
+      line-height: 1;
+    }
+
+    blockquote::before {
+      top: -10px;
+      left: 5px;
+    }
+
+    blockquote::after {
+      content: '"';
+      bottom: -35px;
+      right: 5px;
+    }
+
+    blockquote small {
+      display: block;
+      margin-top: 15px;
+      font-size: 18px;
+      color: #a0a0a0; /* Teks penulis abu-abu sedang */
+    }
+
+    blockquote small::before {
+      content: "— ";
+    }
+
+    .button {
+      background-color: #bb86fc; /* Warna tombol utama */
+      color: #121212; /* Teks tombol gelap */
+      padding: 12px 25px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: none;
+      font-family: 'Roboto', sans-serif;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .button:hover {
+      background-color: #cf6679; /* Hover dengan aksen kedua */
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .button:active {
+      transform: translateY(0);
+    }
+
+    .button.share {
+      background-color: #404040; /* Tombol share lebih kalem */
+      color: #f0f0f0;
+    }
+
+    .button.share:hover {
+      background-color: #555555;
+    }
+
+    footer {
+      margin-top: 20px;
+      color: #a0a0a0;
+    }
+
+    footer a {
+      color: #a0a0a0;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #bb86fc; /* Link footer saat hover */
+    }
+
+    /* Responsif */
+    @media (max-width: 768px) {
+      .container {
+        width: 90%;
+        padding: 30px;
+      }
+      
+      h1 {
+        font-size: 30px;
+      }
+      
+      blockquote {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sebuah Kata</h1>
+    <blockquote id="quote">
+      "Kamu akan menuai apa yang kamu tabur."
+      <small id="author">Nagek</small>
+    </blockquote>
+    
+    <footer>
+      <p>&copy; 2025 ruang.afno | <a href="https://www.instagram.com/ruang.afno">Profile Afno</a></p>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const shareQuoteButton = document.getElementById('share-quote');
+      
+      // Fungsi untuk membagikan quote
+      function shareQuote() {
+        const quoteElement = document.getElementById('quote');
+        const quoteText = quoteElement.textContent;
+        
+        if (navigator.share) {
+          // Menggunakan Web Share API jika tersedia
+          navigator.share({
+            title: 'Kutipan',
+            text: quoteText,
+            url: window.location.href
+          })
+          .catch(error => console.log('Error sharing:', error));
+        } else {
+          // Fallback untuk browser yang tidak mendukung Web Share API
+          navigator.clipboard.writeText(quoteText)
+            .then(() => {
+              alert('Kutipan telah disalin ke clipboard!');
+            })
+            .catch(err => {
+              console.error('Gagal menyalin teks: ', err);
+              // Fallback kedua untuk browser yang lebih lama
+              const textArea = document.createElement('textarea');
+              textArea.value = quoteText;
+              document.body.appendChild(textArea);
+              textArea.select();
+              document.execCommand('copy');
+              document.body.removeChild(textArea);
+              alert('Kutipan telah disalin ke clipboard!');
+            });
+        }
+      }
+      
+      // Event listener untuk tombol share
+      shareQuoteButton.addEventListener('click', shareQuote);
+    });
+  </script>
+</body>
+</html>
